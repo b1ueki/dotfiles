@@ -54,7 +54,11 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 inoremap <expr><C-e>  neocomplcache#cancel_popup()
+NeoBundleLazy 'shima-529/C-prototype.vim', {
+    \ 'autoload' : {'filetypes' : ['c']}
+    \}
 NeoBundle 'marcus/rsense'
+NeoBundle 'Shougo/neocomplete.vim'
 NeoBundle 'supermomonga/neocomplete-rsense.vim'
 " ファイルオープンを便利に
 NeoBundle 'Shougo/unite.vim'
@@ -83,7 +87,17 @@ NeoBundle 'vim-scripts/AnsiEsc.vim'
 NeoBundle 'bronson/vim-trailing-whitespace'
 " less用のsyntaxハイライト
 NeoBundle 'KohPoll/vim-less'
-
+" C++リポジトリ追加
+NeoBundleLazy 'vim-jp/cpp-vim',{
+            \ 'autoload' : {'filetypes' : 'cpp'}
+            \  }
+" YouCompleteMe
+NeoBundleLazy 'Valloric/YouCompleteMe',{
+    \ 'build' : {
+    \ 'mac' : './install.sh --clang-completer',
+    \ 'unix' : './install.sh --clang-completer',
+    \}
+    \}
 " 余談: neocompleteは合わなかった。ctrl+pで補完するのが便利
 
 call neobundle#end()
@@ -99,6 +113,17 @@ NeoBundleCheck
 """"""""""""""""""""""""""""""
 " 各種オプションの設定
 """"""""""""""""""""""""""""""
+" ファイル指定で開かれた場合はNERDTreeは表示しない
+if !argc()
+  autocmd vimenter * NERDTree|normal gg3j
+endif
+" ブックマークを最初から表示
+let g:NERDTreeShowBookmarks=1
+" include補完path追加
+augroup cpp-path
+  autocmd!
+  autocmd FileType cpp setlocal path=.,/usr/include,/usr/local/include,/usr/lib/c++/v1
+augroup END
 "Rsense
 let g:rsenseHome = '/usr/local/lib/rsense-0.3'
 let g:rsenseUseOmniFunc = 1
@@ -171,6 +196,10 @@ set shiftwidth=2
 set smarttab
 " カーソルを行頭、行末で止まらないようにする
 set whichwrap=b,s,h,l,<,>,[,]
+" 横線の表示
+set cursorline
+" 横線の表示
+set cursorcolumn
 " 構文毎に文字色を変化させる
 syntax on
 " カラースキーマの指定
@@ -289,4 +318,5 @@ nnoremap <silent><C-E> :NERDTreeToggle<CR>
 
 " filetypeの自動検出(最後の方に書いた方がいいらしい)
 filetype on
+
 

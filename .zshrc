@@ -211,3 +211,12 @@ PROMPT="
 [%n]$ "
 
 PROMPT2='[%n]> ' 
+########################################
+# ターミナルのタイトル変更
+case "${TERM}" in
+  kterm*|xterm)
+    precmd() {
+        echo -ne "\033]0;${Kazutoshi}@${Iwata}\077"
+    }
+    ;;
+esac
