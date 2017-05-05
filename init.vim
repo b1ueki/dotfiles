@@ -2,7 +2,7 @@
 if &compatible
   set nocompatible
 endif
-set runtimepath+=~/.nvim/dein/dein.vim
+set runtimepath+=~/.ghq/github.com/Shougo/dein.vim
 
 call dein#begin(expand('~/.nvim/dein'))
 "####ここから####
@@ -17,13 +17,17 @@ call dein#add('bronson/vim-trailing-whitespace')
 "ステータス行強化
 call dein#add('itchyny/lightline.vim')
 "カラースキーマ
-call dein#add('tomasr/molokai')
+"call dein#add('tomasr/molokai')
 "コード自動補完1
 call dein#add('Shougo/neosnippet.vim')
 "コード自動補完2
 call dein#add('Shougo/neovomplete.vim')
 "C/C++のコード補完
 call dein#add('justmao945/vim-clang')
+"C/C++のコード補完2
+call dein#add('rhysd/vim-clang-format')
+"カラースキーマ
+call dein#add('jacoborus/tender.vim')
 call dein#end()
 "####ここまで####
 
@@ -48,7 +52,7 @@ if has("autocmd")
 "####ここまで####
 
 "####表示設定####
-colorscheme molokai
+colorscheme tender
 set ruler "カーソルの行列番号を表示する
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc'&enc).']['.&ff.']'} "ステータス業に表示させる情報の指定
 set statusline+={fugitive#statusline()} "ステータス行に現在のgitブランチを表示する

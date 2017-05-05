@@ -95,7 +95,7 @@ SPROMPT=$tmp_sprompt  # スペル訂正用プロンプト
 
 ### Title (user@hostname) ###
 case "${TERM}" in
-kterm*|xterm*|)
+(kterm*|xterm*|)
   precmd() {
     echo -ne "\033]0;${USER}@${HOST%%.*}\007"
   }
@@ -118,10 +118,12 @@ case "${OSTYPE}" in
 esac
 
 ### Aliases ###
-alias r=rails
-alias v=vim
+alias vim=nvim
 
-# cdコマンド実行後、lsを実行する
-#function cd() {
-#  builtin cd $@ && ls;
-#}
+# ls after cd
+function cd() {
+  builtin cd $@ && ls;
+}
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
