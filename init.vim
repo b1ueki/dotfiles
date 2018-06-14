@@ -2,7 +2,7 @@
 if &compatible
   set nocompatible
 endif
-set runtimepath+=~/.nvim/dein/dein.vim
+set runtimepath+=~/.ghq/github.com/Shougo/dein.vim
 
 call dein#begin(expand('~/.nvim/dein'))
 "####ここから####
@@ -16,14 +16,30 @@ call dein#add('nathanaelkane/vim-indent-guides')
 call dein#add('bronson/vim-trailing-whitespace')
 "ステータス行強化
 call dein#add('itchyny/lightline.vim')
-"カラースキーマ
-call dein#add('tomasr/molokai')
-"コード自動補完1
-call dein#add('Shougo/neosnippet.vim')
 "コード自動補完2
-call dein#add('Shougo/neovomplete.vim')
+"call dein#add('Shougo/neoomplete.vim')
 "C/C++のコード補完
-call dein#add('justmao945/vim-clang')
+"call dein#add('justmao945/vim-clang')
+"カラースキーマ
+call dein#add('jacoborus/tender.vim')
+"ruby文法エラー,スタイルチェック
+call dein#add('bbatsov/rubocop')
+"キーワード切り替え
+call dein#add('AndrewRadev/switch.vim')
+"railsプロジェクト用プラグイン
+call dein#add('tpope/vim-rails')
+"railsプロジェクト用Unite-source
+call dein#add('basyura/unite-rails')
+"if...endなど対応するキーワードの自動補完
+call dein#add('tpope/vim-endwise')
+"ruby/gemsのリファレンス
+call dein#add('yuku-t/vim-ref-ri')
+"def...end等でも%を使えるようにする
+call dein#add('vim-scripts/ruby-matchit')
+"括弧補完
+call dein#add('cohama/lexima.vim')
+"pythonの補完
+call dein#add('davidhalter/jedi-vim')
 call dein#end()
 "####ここまで####
 
@@ -48,14 +64,15 @@ if has("autocmd")
 "####ここまで####
 
 "####表示設定####
-colorscheme molokai
+"let g:hybrid_use_iTerm_colors = 1
+colorscheme tender
 set ruler "カーソルの行列番号を表示する
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc'&enc).']['.&ff.']'} "ステータス業に表示させる情報の指定
 set statusline+={fugitive#statusline()} "ステータス行に現在のgitブランチを表示する
 set number "行番号を表示する
 set title "編集中のファイル名を表示
 set showmatch "括弧入力時の対応する括弧を表示
-syntax on "コードの色分け
+"syntax on "コードの色分け
 set tabstop=4 "インデントをスペース4つ分に設定
 set smartindent "オートインデント
 set cursorline "現在の行を強調表示
@@ -170,3 +187,6 @@ endif
 let g:clang_c_options = '-std=c11'
 let g:clang_cpp_options = '-std=c++11 -stdlib=libc++'
 "####ここまで
+
+"####ファイルパス補完
+inoremap <TAB><TAB> <C-x><C-f>
