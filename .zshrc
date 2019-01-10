@@ -118,9 +118,7 @@ case "${OSTYPE}" in
 esac
 
 ### Aliases ###
-alias r=rails
-alias v=vim
-
+alias vim=nvim
 # cdコマンド実行後、lsを実行する
 #function cd() {
 #  builtin cd $@ && ls;
