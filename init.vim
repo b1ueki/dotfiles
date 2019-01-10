@@ -66,6 +66,14 @@ if has("autocmd")
 "####表示設定####
 "let g:hybrid_use_iTerm_colors = 1
 colorscheme tender
+augroup TransparenBG
+  autocmd!
+  autocmd Colorscheme * highlight Normal ctermbg=none
+  autocmd Colorscheme * highlight NonText ctermbg=none
+  autocmd Colorscheme * highlight LineNr ctermbg=none
+  autocmd Colorscheme * highlight Folded ctermbg=none
+  autocmd Colorscheme * highlight EndOfBuffer ctermbg=none
+augroup END
 set ruler "カーソルの行列番号を表示する
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc'&enc).']['.&ff.']'} "ステータス業に表示させる情報の指定
 set statusline+={fugitive#statusline()} "ステータス行に現在のgitブランチを表示する
@@ -125,8 +133,8 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 "ブックマークを初期表示
 let g:NERDTreeShowBookmarks=1
 "ファイル名が指定されていた場合NERDTreeを表示しない
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+"autocmd StdinReadPre * let s:std_in=1
+"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 "NERDTreeを<Ctrl-e>で表示する
 map <C-e> :NERDTreeToggle<CR>
 "拡張子のハイライトを設定する
